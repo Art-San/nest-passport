@@ -26,7 +26,7 @@ export class UsersController {
 	@UseGuards(LocalAuthGuard)
 	@Post('/login')
 	login(@Request() req): any {
-		return { User: req.user, msg: 'User logged in' }
+		return { User: req.user, msg: 'Пользователь вошел в систему' }
 	}
 
 	// Get / protected
@@ -35,5 +35,11 @@ export class UsersController {
 	getHello(@Request() req): string {
 		console.log(1, 'req user', req.user)
 		return req.user
+	}
+
+	@Get('/logout')
+	logout(@Request() req): any {
+		req.session.destroy()
+		return { msg: 'Сеанс пользователя завершен' }
 	}
 }
