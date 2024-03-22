@@ -5,8 +5,7 @@ import { User } from './users.model'
 @Injectable()
 export class UsersService {
 	constructor(@InjectModel('user') private readonly userModel: Model<User>) {}
-	async registerUser(userName: string, password: string) {
-		const username = userName.toLowerCase()
+	async registerUser(username: string, password: string) {
 		const user = await this.userModel.findOne({ username: username })
 
 		if (user) {
@@ -22,8 +21,7 @@ export class UsersService {
 		return newUser
 	}
 
-	async getUser(userName: string) {
-		const username = userName.toLowerCase()
+	async getUser(username: string) {
 		const user = await this.userModel.findOne({ username })
 		return user
 	}
