@@ -8,7 +8,7 @@ export const UserSchema = new mongoose.Schema(
 		},
 		password: {
 			type: String,
-			required: true,
+			// required: true,
 		},
 	},
 	{ timestamps: true }
@@ -17,5 +17,5 @@ export const UserSchema = new mongoose.Schema(
 export interface User extends mongoose.Document {
 	_id: string
 	username: string
-	password: string
+	password?: string
 }
