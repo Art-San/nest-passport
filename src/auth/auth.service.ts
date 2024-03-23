@@ -6,6 +6,8 @@ import * as bcrypt from 'bcrypt'
 export class AuthService {
 	constructor(private readonly usersService: UsersService) {}
 	async validateUser(username: string, password: string): Promise<any> {
+		console.log(1, username)
+		console.log(2, password)
 		const user = await this.usersService.getUser(username)
 		const passwordValid = await bcrypt.compare(password, user.password)
 		if (!user) {

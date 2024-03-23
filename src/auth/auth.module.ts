@@ -8,9 +8,14 @@ import { GithubStrategy } from './strategy/github2.strategy'
 import { AuthController } from './auth.controller'
 
 @Module({
-	imports: [UsersModule, PassportModule.register({ session: true })],
-	providers: [AuthService, LocalStrategy, SessionSerializer],
-	// providers: [AuthService, LocalStrategy, GithubStrategy, SessionSerializer],
 	controllers: [AuthController],
+	imports: [
+		PassportModule.register({
+			session: true,
+		}),
+		UsersModule,
+	],
+	providers: [AuthService, GithubStrategy, SessionSerializer],
+	// providers: [AuthService, LocalStrategy, GithubStrategy, SessionSerializer],
 })
 export class AuthModule {}

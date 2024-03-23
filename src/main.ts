@@ -9,10 +9,11 @@ dotenv.config() //process.env
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule)
 	app.setGlobalPrefix('api')
+
 	app.use(
 		session({
-			secret: process.env.SESSION_SECRET,
-			// secret: 'keyboard',
+			// secret: process.env.SESSION_SECRET,
+			secret: 'keyboard',
 			resave: false,
 			saveUninitialized: false,
 		})
@@ -20,8 +21,6 @@ async function bootstrap() {
 
 	app.use(passport.initialize())
 	app.use(passport.session())
-
-	// app.setGlobalPrefix('api')
 
 	await app.listen(5000)
 }
