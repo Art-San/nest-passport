@@ -1,33 +1,33 @@
 import { Body, Controller, Post, Request, UseGuards, Get } from '@nestjs/common'
 import { UsersService } from './users.service'
-import * as bcrypt from 'bcrypt'
-import { LocalAuthGuard } from 'src/auth/local.auth.guard'
-import { AuthenticatedGuard } from 'src/auth/authenticated.guard'
+// import * as bcrypt from 'bcrypt'
+// import { LocalAuthGuard } from 'src/auth/local.auth.guard'
+import { AuthenticatedGuard } from 'src/auth/guards/authenticated.guard'
 
 @Controller('users')
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
-	//post / signup
-	@Post('/signup')
-	async addUser(@Body() dto: any) {
-		const saltOrRounds = 10
-		const hashedPassword = await bcrypt.hash(dto.password, saltOrRounds)
-		const result = await this.usersService.registerUser(
-			dto.username,
-			hashedPassword
-		)
-		return {
-			msg: 'User successfully registered',
-			userId: result.id,
-			userName: result.username,
-		}
-	}
+	// post / signup
+	// @Post('/signup')
+	// async addUser(@Body() dto: any) {
+	// 	const saltOrRounds = 10
+	// 	const hashedPassword = await bcrypt.hash(dto.password, saltOrRounds)
+	// 	const result = await this.usersService.registerUser(
+	// 		dto.username,
+	// 		hashedPassword
+	// 	)
+	// 	return {
+	// 		msg: 'User successfully registered',
+	// 		userId: result.id,
+	// 		userName: result.username,
+	// 	}
+	// }
 
-	@UseGuards(LocalAuthGuard)
-	@Post('/login')
-	login(@Request() req): any {
-		return { User: req.user, msg: 'Пользователь вошел в систему' }
-	}
+	// @UseGuards(LocalAuthGuard)
+	// @Post('/login')
+	// login(@Request() req): any {
+	// 	return { User: req.user, msg: 'Пользователь вошел в систему' }
+	// }
 
 	// Get / protected
 	@UseGuards(AuthenticatedGuard)
@@ -40,6 +40,7 @@ export class UsersController {
 	@Get('/logout')
 	logout(@Request() req): any {
 		req.session.destroy()
+		console.log(1, 'logout')
 		return { msg: 'Сеанс пользователя завершен' }
 	}
 }
