@@ -29,14 +29,14 @@ export class UsersController {
 	// 	return { User: req.user, msg: 'Пользователь вошел в систему' }
 	// }
 
-	// Get / protected
+	// http://localhost:5000/api/users/protected
 	@UseGuards(AuthenticatedGuard)
 	@Get('/protected')
 	getHello(@Request() req): string {
 		console.log(1, 'req user', req.user)
 		return req.user
 	}
-
+	// http://localhost:5000/api/users/logout
 	@Get('/logout')
 	logout(@Request() req): any {
 		req.session.destroy()

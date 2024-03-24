@@ -82,7 +82,7 @@ export class GithubStrategy extends PassportStrategy(GitHubStrategy, 'github') {
 		// profile: any,
 		done: Function
 	) {
-		console.log(0, 'request', request)
+		// console.log(0, 'request', request)
 		// console.log(1, 'profile.username', profile.username) // Art-San
 
 		const user = await this.userModel.findOne({ username: profile.username })
