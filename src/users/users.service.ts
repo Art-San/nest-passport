@@ -8,17 +8,16 @@ export class UsersService {
 	async registerUser(username: string, password: string) {
 		const user = await this.userModel.findOne({ username: username })
 
-		if (user) {
-			throw new BadRequestException('Юзер с таким email есть уже в системе')
+		if (!user) {
+			const newUser = new this.userModel({
+				username,
+				password,
+			})
+
+			await newUser.save()
+			return newUser
 		}
-
-		const newUser = new this.userModel({
-			username,
-			password,
-		})
-
-		await newUser.save()
-		return newUser
+		return user
 	}
 
 	async getUser(username: string) {

@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport'
 import { Response } from 'express'
 import { GitAuthGuard } from './guards/git.guard'
 import { AuthService } from './auth.service'
+import { GoogleAuthGuard } from './guards/google.guard'
 
 @Controller('auth')
 export class AuthController {
@@ -33,5 +34,19 @@ export class AuthController {
 	@Get('logout')
 	logout(@Req() req, @Res({ passthrough: true }) res: Response) {
 		return this.authService.logout(req, res)
+	}
+
+	// http://localhost:5000/api/auth/google/login
+	@Get('google/login')
+	@UseGuards(GoogleAuthGuard)
+	handleLogin() {
+		return { msg: 'Google Authentication' }
+	}
+
+	// api/auth/google/redirect
+	@Get('google/redirect')
+	@UseGuards(GoogleAuthGuard)
+	handleRedirect() {
+		return { msg: 'OK' }
 	}
 }
