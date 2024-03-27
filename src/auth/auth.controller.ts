@@ -19,7 +19,6 @@ export class AuthController {
 	@Get('google/redirect')
 	@UseGuards(GoogleAuthGuard)
 	handleRedirect(@Req() req, @Res({ passthrough: true }) res: Response) {
-		// console.log(1, 'req.user', req.user)
 		// res.redirect('http://localhost:3000/api')
 
 		return { msg1: `Пользователь ${req.user.username} вошел в систему` }
