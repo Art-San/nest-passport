@@ -30,17 +30,17 @@ export class UsersController {
 	// }
 
 	// http://localhost:5000/api/users/protected
-	@UseGuards(AuthenticatedGuard)
-	@Get('/protected')
-	getHello(@Request() req): string {
-		console.log(1, 'req user', req.user)
-		return req.user
-	}
-	// http://localhost:5000/api/users/logout
-	@Get('/logout')
-	logout(@Request() req): any {
-		req.session.destroy()
-		console.log(1, 'logout')
-		return { msg: 'Сеанс пользователя завершен' }
-	}
+	// @UseGuards(AuthenticatedGuard)
+	// @Get('/protected')
+	// getHello(@Request() req): string {
+	// 	console.log(1, 'req user', req.user)
+	// 	return req.user
+	// }
+	// // http://localhost:5000/api/users/logout
+	// @Get('/logout')
+	// logout(@Request() req): any {
+	// 	req.session.destroy()
+	// 	console.log(1, 'logout')
+	// 	return { msg: 'Сеанс пользователя завершен' }
+	// }
 }

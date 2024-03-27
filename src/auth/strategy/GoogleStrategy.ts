@@ -23,12 +23,13 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
 		request: any,
 		accessToken: string,
 		refreshToken: string,
-		profile: Profile
+		profile: Profile,
+		done: Function
 	) {
-		console.log(0, 'request', request)
-		console.log(1, 'accessToken', accessToken)
-		console.log(2, 'refreshToken', refreshToken)
-		console.log(3, 'profile', profile)
+		// console.log(0, 'request', request)
+		// console.log(1, 'accessToken', accessToken)
+		// console.log(2, 'refreshToken', refreshToken)
+		// console.log(3, 'profile', profile)
 
 		// const user = await this.authService.validateUser({
 		// 	email: profile.emails[0].value,
@@ -37,9 +38,13 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
 
 		const user = await this.usersService.registerUser(
 			profile.displayName,
-			profile.displayName
+			profile.emails[0].value
 		)
 
-		return user || null
+		done(null, user)
+		//==========================================================
+		// https://github.com/stuyy/google-nestjs-oauth2/blob/master/src/auth/utils/GoogleStrategy.ts
+		// return user || null
+		//========================================================
 	}
 }

@@ -13,7 +13,6 @@ const configService = new ConfigService() // не работает  configServic
 		AuthModule,
 		UsersModule,
 		MongooseModule.forRoot('mongodb://127.0.0.1:27017/session-based-auth'),
-		// PassportModule.register({ session: true }),
 	],
 	controllers: [AppController],
 	providers: [AppService],
