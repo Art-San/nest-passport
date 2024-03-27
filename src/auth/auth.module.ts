@@ -8,6 +8,7 @@ import { AuthController } from './auth.controller'
 import { MongooseModule } from '@nestjs/mongoose'
 import { UserSchema } from 'src/users/users.model'
 import { GoogleStrategy } from './strategy/google.strategy'
+import { LocalStrategy } from './strategy/local.strategy'
 
 @Module({
 	controllers: [AuthController],
@@ -18,7 +19,13 @@ import { GoogleStrategy } from './strategy/google.strategy'
 		MongooseModule.forFeature([{ name: 'user', schema: UserSchema }]),
 		UsersModule,
 	],
-	providers: [AuthService, GithubStrategy, GoogleStrategy, SessionSerializer],
+	providers: [
+		AuthService,
+		GithubStrategy,
+		GoogleStrategy,
+		LocalStrategy,
+		SessionSerializer,
+	],
 	exports: [AuthService],
 })
 export class AuthModule {}
