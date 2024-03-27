@@ -6,20 +6,6 @@ import * as bcrypt from 'bcrypt'
 @Injectable()
 export class AuthService {
 	constructor(private readonly usersService: UsersService) {}
-	async check(req: Request) {
-		// console.log(1, 'check', req.isAuthenticated())
-		if (req.isAuthenticated()) {
-			return { user: req.user }
-		} else {
-			return { user: null }
-		}
-	}
-
-	async logout(req: any, res: Response) {
-		req.session.destroy((err) => {})
-		return { message: `Logged out ${req.user.username || 'n.n.'}` }
-	}
-
 	// async validateUser(username: string, password: string): Promise<any> {
 	// 	console.log(1, username)
 	// 	console.log(2, password)
@@ -36,4 +22,18 @@ export class AuthService {
 	// 	}
 	// 	return null
 	// }
+
+	async check(req: Request) {
+		console.log(1, 'check', req.isAuthenticated())
+		if (req.isAuthenticated()) {
+			return { user: req.user }
+		} else {
+			return { user: null }
+		}
+	}
+
+	async logout(req: Request, res: Response) {
+		req.session.destroy((err) => {})
+		return { message: 'Logged out' }
+	}
 }

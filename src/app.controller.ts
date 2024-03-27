@@ -10,4 +10,8 @@ export class AppController {
 	getHello(): string {
 		return this.appService.getHello()
 	}
+	@Get('login')
+	loginPage(): string {
+		return this.appService.getLoginFom()
+	}
 }

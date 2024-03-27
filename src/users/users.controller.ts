@@ -4,6 +4,11 @@ import { UsersService } from './users.service'
 // import { LocalAuthGuard } from 'src/auth/local.auth.guard'
 import { AuthenticatedGuard } from 'src/auth/guards/authenticated.guard'
 
+interface IReq {
+	msg: string
+	username: string
+	passwordEmail: string
+}
 @Controller('users')
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
@@ -29,18 +34,22 @@ export class UsersController {
 	// 	return { User: req.user, msg: 'Пользователь вошел в систему' }
 	// }
 
-	// http://localhost:5000/api/users/protected
-	// @UseGuards(AuthenticatedGuard)
-	// @Get('/protected')
-	// getHello(@Request() req): string {
-	// 	console.log(1, 'req user', req.user)
-	// 	return req.user
-	// }
-	// // http://localhost:5000/api/users/logout
-	// @Get('/logout')
-	// logout(@Request() req): any {
-	// 	req.session.destroy()
-	// 	console.log(1, 'logout')
-	// 	return { msg: 'Сеанс пользователя завершен' }
-	// }
+	// http://localhost:3000/api/users/protected
+	@UseGuards(AuthenticatedGuard)
+	@Get('/protected')
+	getHello(@Request() req): IReq {
+		// console.log(1, 'req user', req.user)
+		return {
+			msg: 'Закрытый роут',
+			username: req.user.username,
+			passwordEmail: req.user.password,
+		}
+		return req.user
+	}
+	// http://localhost:3000/api/users/logout
+	@Get('/logout')
+	logout(@Request() req): any {
+		req.session.destroy()
+		return { msg: 'Сеанс пользователя завершен' }
+	}
 }
