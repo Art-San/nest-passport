@@ -29,7 +29,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
 		// console.log(0, 'request', request)
 		// console.log(1, 'accessToken', accessToken) // yaxH_oMxXkO.........
 		// console.log(2, 'refreshToken', refreshToken) // undefined
-		console.log(3, 'profile', profile) // {Александр А'}
+		// console.log(3, 'profile', profile) // {Александр А'}
 		// console.log(4, 'profile.displayName', profile.displayName) // {Александр А'}
 		// console.log(5, 'profile.emails', profile.emails[0].value) // artsan@gmail.com
 
